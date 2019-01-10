@@ -41,7 +41,7 @@ public class UIManager : Singleton_MB<UIManager>
             pauseMenu.SetMenuActive(false);
         if (previousState == GameState.RUNNING && currentState == GameState.PAUSED)
             pauseMenu.SetMenuActive(true);
-
+        
         if (previousState == GameState.PREGAME && currentState == GameState.RUNNING)
         {
             mainMenu.SetMenuActive(false);

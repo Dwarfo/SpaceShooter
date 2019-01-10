@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
 
     private void HandleGameStateChanged(GameState current, GameState previous)
     {
-        if (current == GameState.RUNNING)
+        if (current == GameState.RUNNING && previous == GameState.PREGAME)
         {
             StartCoroutine(AudioFading.MusicFadeOut(source));
             source.clip = gameMusic;

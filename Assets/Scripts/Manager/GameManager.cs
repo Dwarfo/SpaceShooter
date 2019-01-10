@@ -24,6 +24,7 @@ public class GameManager : Singleton_MB<GameManager> {
     private List<GameObject> instancedSystemPrefabs;
     [SerializeField]
     private string currentLevelName = string.Empty;
+    [SerializeField]
     private GameState currentGameState = GameState.PREGAME;
 
     private List<AsyncOperation> loadOperations;
@@ -65,7 +66,7 @@ public class GameManager : Singleton_MB<GameManager> {
     public void RestartGame()
     {
         UnloadLevel(currentLevelName);
-        UpdateState(GameState.PREGAME);
+        //UpdateState(GameState.PREGAME);
     }
 
     public void QuitGame()
@@ -139,15 +140,17 @@ public class GameManager : Singleton_MB<GameManager> {
     {
         if (loadOperations.Contains(ao))
         {
+            Debug.Log("CONTAINS");
             loadOperations.Remove(ao);
 
             if (loadOperations.Count == 0)
             {
                 UpdateState(GameState.PREGAME);
+                Debug.Log("Unload Complete");
             }
         }
 
-        Debug.Log("Load Complete");
+        //Debug.Log("Unload Complete");
     }
 
     public void LoadLevel(string levelName)
@@ -169,6 +172,7 @@ public class GameManager : Singleton_MB<GameManager> {
     public void UnloadLevel(string levelName)
     {
         AsyncOperation ao = SceneManager.UnloadSceneAsync(levelName);
+        loadOperations.Add(ao);
         ao.completed += OnUnLoadOperationComplete;
         currentLevelName = "BootScene";
     }
@@ -193,6 +197,7 @@ public class GameManager : Singleton_MB<GameManager> {
         currentLevelStats++;
         Debug.Log("Now loading new level");
         UnloadLevel(currentLevelName);
+        UpdateState(GameState.PREGAME);
         StartGame();
     }
 
@@ -228,19 +233,19 @@ public class GameManager : Singleton_MB<GameManager> {
     public void SaveGame(String savename)
     {
         BinaryFormatter gameSaver = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + savename + ".sv", FileMode.Open);
+        FileStream file = File.Open(Application.persistentDataPath + savename + ".sv", FileMode.OpenOrCreate);
 
         GameSave gameSave = GetGameSave();
 
         gameSaver.Serialize(file, gameSave);
         file.Close();
     }
-
+    /*
     public void LoadGame()
     {
 
     }
-
+    */
 }
 
 public enum GameState
