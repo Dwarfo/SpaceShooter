@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41bdff35bb9a6944d81e97c50eea09bf, type: 3}
+  m_Name: RedLaser
+  m_EditorClassIdentifier: 
+  misile: {fileID: 1717240766493654, guid: c10ea33600d0db14c85ea9ce7cf55501, type: 2}
+  coolDown: 0.2
+  shootingAudio:
+  - {fileID: 8300000, guid: 952118d427ea76e4c8da149165b09192, type: 3}
+  - {fileID: 8300000, guid: 911fabda4fd17924c96388166debff78, type: 3}
+  - {fileID: 8300000, guid: 3f1a045dcf6cf314eaec633e037b3058, type: 3}
+  - {fileID: 8300000, guid: 43c7eaccda95ede4b90078633b7b2373, type: 3}
+  - {fileID: 8300000, guid: 07c2f7292a0bd534a853901a736dc133, type: 3}
+  weaponName: RedLaser
+  weaponIcon: {fileID: 21300000, guid: 32fdfdf39a938b64fb4ba6ac980da2b8, type: 3}
