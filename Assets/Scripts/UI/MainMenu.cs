@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour {
+public class MainMenu : MonoBehaviour, IMenu {
 
     public Button startGameButton;
     public Button loadGameButton;
@@ -12,9 +12,10 @@ public class MainMenu : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
+        //GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
         startGameButton.onClick.AddListener(StartGame);
         quitGameButton.onClick.AddListener(QuitGame);
+        loadGameButton.onClick.AddListener(ShowLoadMenu);
     }
 
     // Update is called once per frame
@@ -46,12 +47,13 @@ public class MainMenu : MonoBehaviour {
         GameManager.Instance.QuitGame();
     }
 
-    private void LoadGame()
+
+    private void ShowLoadMenu()
     {
-        //UIManager.Instance
+        UIManager.Instance.ToLoadMenu();
     }
 
-    private void SetMenuActive(bool active)
+    public void SetMenuActive(bool active)
     {
         Transform[] transforms = gameObject.GetComponentsInChildren<Transform>(active);
         List<Transform> listedTransforms = new List<Transform>(transforms);
@@ -61,4 +63,6 @@ public class MainMenu : MonoBehaviour {
         foreach (Transform tr in listedTransforms)
             tr.gameObject.SetActive(active);
     }
+
+
 }

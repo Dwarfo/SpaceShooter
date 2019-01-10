@@ -54,7 +54,7 @@ public class EnemyControls : MonoBehaviour {
 
     }
 
-    private void HandleGameStateChanged(GameState previous, GameState current)
+    private void HandleGameStateChanged(GameState current, GameState previous)
     {
         if (current == GameState.PAUSED)
             gamePaused = true;

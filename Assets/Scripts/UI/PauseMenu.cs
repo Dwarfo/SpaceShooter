@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour {
+public class PauseMenu : MonoBehaviour,IMenu {
 
     public Button continueButton;
     public Button saveGameButton;
@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour {
 
     private void Start()
     {
-        GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
+        //GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
         UIManager.Instance.SetPauseMenu(this);
 
         continueButton.onClick.AddListener(HandleContinueButton);
@@ -20,8 +20,8 @@ public class PauseMenu : MonoBehaviour {
         mainMenuButton.onClick.AddListener(HandleMainMenuButton);
         quitGameButton.onClick.AddListener(HandleQuitGameButton);
 
-        gameObject.SetActive(false);
-
+        //gameObject.SetActive(false);
+        SetMenuActive(false);
     }
 
     private void HandleContinueButton()
@@ -31,7 +31,8 @@ public class PauseMenu : MonoBehaviour {
 
     private void HandleSaveGameButton()
     {
-
+        Debug.Log(Application.persistentDataPath);
+        GameManager.Instance.SaveGame("228");
     }
 
     private void HandleMainMenuButton()
@@ -52,7 +53,7 @@ public class PauseMenu : MonoBehaviour {
             SetMenuActive(false);
     }
 
-    private void SetMenuActive(bool active)
+    public void SetMenuActive(bool active)
     {
         Transform[] transforms = gameObject.GetComponentsInChildren<Transform>(active);
         List<Transform> listedTransforms = new List<Transform>(transforms);

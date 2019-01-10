@@ -93,7 +93,7 @@ public class Spawner : Singleton_MB<Spawner> {
 
     private void HandleGameStateChanged(GameState current, GameState previous)
     {
-        if (current == GameState.RUNNING)
+        if (current == GameState.RUNNING && previous == GameState.PREGAME)
         {
             levelStats = GameManager.Instance.GetCurrentStats();
             currentGroup = 0;

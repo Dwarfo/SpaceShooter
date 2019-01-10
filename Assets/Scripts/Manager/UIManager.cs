@@ -14,6 +14,8 @@ public class UIManager : Singleton_MB<UIManager>
     private GameObject playerInterface;
     [SerializeField]
     private MainMenu mainMenu;
+    [SerializeField]
+    private LoadMenu loadMenu;
 
 
 
@@ -35,10 +37,20 @@ public class UIManager : Singleton_MB<UIManager>
 
     private void HandleGameStateChanged(GameState currentState, GameState previousState)
     {
-        if (previousState == GameState.PREGAME)
-            return;
-        if(pauseMenu != null)
-            pauseMenu.gameObject.SetActive(currentState == GameState.PAUSED);
+        if (previousState == GameState.PAUSED && currentState == GameState.RUNNING)
+            pauseMenu.SetMenuActive(false);
+        if (previousState == GameState.RUNNING && currentState == GameState.PAUSED)
+            pauseMenu.SetMenuActive(true);
+
+        if (previousState == GameState.PREGAME && currentState == GameState.RUNNING)
+        {
+            mainMenu.SetMenuActive(false);
+        }
+
+        if (previousState != GameState.PREGAME && currentState == GameState.PREGAME)
+        {
+            mainMenu.SetMenuActive(true);
+        }
 
     }
 
@@ -59,5 +71,20 @@ public class UIManager : Singleton_MB<UIManager>
     public void SetInterface(GameObject pi)
     {
         this.playerInterface = pi;
+    }
+
+    private void TransitionInMenus(IMenu from, IMenu to)
+    {
+        from.SetMenuActive(false);
+        to.SetMenuActive(true);
+    }
+
+    public void ToLoadMenu()
+    {
+        TransitionInMenus(mainMenu, loadMenu);
+    }
+    public void ToMainMenu()
+    {
+        TransitionInMenus(loadMenu, mainMenu);
     }
 }
