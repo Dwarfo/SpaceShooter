@@ -14,5 +14,5 @@ public class GameSave {
     public float drag;
     public int LivesRemaining;
     public int currentLevelNum;
-    public MisileSO currentWeapon;
+    public int currentWeapon;
 }

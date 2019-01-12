@@ -32,7 +32,7 @@ public class Spawner : Singleton_MB<Spawner> {
 
     void Update ()
     {
-        if(countSpawningTime != null)
+        if(countSpawningTime != null && GameManager.Instance.CurrentGameState == GameState.RUNNING)
             countSpawningTime(Time.deltaTime);
 	}
 
@@ -93,7 +93,7 @@ public class Spawner : Singleton_MB<Spawner> {
 
     private void HandleGameStateChanged(GameState current, GameState previous)
     {
-        if (current == GameState.RUNNING && previous == GameState.PREGAME)
+        if (current == GameState.RUNNING && previous != GameState.PAUSED)
         {
             levelStats = GameManager.Instance.GetCurrentStats();
             currentGroup = 0;

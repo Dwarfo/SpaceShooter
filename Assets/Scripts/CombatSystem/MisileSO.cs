@@ -10,5 +10,6 @@ public class MisileSO : ScriptableObject
     public AudioClip[] shootingAudio;
     public string weaponName;
     public Sprite weaponIcon;
+    public int weaponNum;
 }
 

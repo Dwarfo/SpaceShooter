@@ -26,19 +26,20 @@ public class AudioManager : MonoBehaviour
 
     private void HandleGameStateChanged(GameState current, GameState previous)
     {
+        
         if (current == GameState.RUNNING && previous == GameState.PREGAME)
         {
-            StartCoroutine(AudioFading.MusicFadeOut(source));
+            //StartCoroutine(AudioFading.MusicFadeOut(source));
             source.clip = gameMusic;
             source.Play();
-            StartCoroutine(AudioFading.MusicFadeIn(source));
+            //StartCoroutine(AudioFading.MusicFadeIn(source));
         }
         if (current == GameState.PREGAME)
         {
-            StartCoroutine(AudioFading.MusicFadeOut(source));
+            //StartCoroutine(AudioFading.MusicFadeOut(source));
             source.clip = mainMenuMusic;
             source.Play();
-            StartCoroutine(AudioFading.MusicFadeIn(source));
+            //StartCoroutine(AudioFading.MusicFadeIn(source));
 
         }
     }

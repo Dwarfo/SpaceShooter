@@ -44,6 +44,6 @@ public class LoadMenu : MonoBehaviour, IMenu {
 
     private void HandleBackButton()
     {
-        UIManager.Instance.ToMainMenu();
+        UIManager.Instance.ToMainMenu(this);
     }
 }

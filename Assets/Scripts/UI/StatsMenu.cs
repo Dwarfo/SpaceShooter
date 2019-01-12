@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour,IMenu {
+public class StatsMenu : MonoBehaviour, IMenu {
 
     public Button continueButton;
     public Button saveGameButton;
     public Button mainMenuButton;
     public Button quitGameButton;
 
-    private void Start()
-    {
-        //GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
-        UIManager.Instance.SetPauseMenu(this);
+    public Text statsText;
 
+    void Start ()
+    {
         continueButton.onClick.AddListener(HandleContinueButton);
         saveGameButton.onClick.AddListener(HandleSaveGameButton);
         mainMenuButton.onClick.AddListener(HandleMainMenuButton);
         quitGameButton.onClick.AddListener(HandleQuitGameButton);
-
-        //gameObject.SetActive(false);
-        SetMenuActive(false);
-    }
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 
     private void HandleContinueButton()
     {
-        GameManager.Instance.UpdateState(GameState.RUNNING);
+        GameManager.Instance.StartGame();
     }
 
     private void HandleSaveGameButton()
@@ -37,7 +38,9 @@ public class PauseMenu : MonoBehaviour,IMenu {
 
     private void HandleMainMenuButton()
     {
-        GameManager.Instance.RestartGame();
+        //GameManager.Instance.RestartGame();
+        UIManager.Instance.ToMainMenu(this);
+        GameManager.Instance.GoToMainMenu();
     }
 
     private void HandleQuitGameButton()
@@ -45,13 +48,6 @@ public class PauseMenu : MonoBehaviour,IMenu {
         GameManager.Instance.QuitGame();
     }
 
-    private void HandleGameStateChanged(GameState previous, GameState current)
-    {
-        if (previous == GameState.PAUSED && current == GameState.RUNNING)
-            SetMenuActive(true);
-        if (previous == GameState.RUNNING && current == GameState.PAUSED)
-            SetMenuActive(false);
-    }
 
     public void SetMenuActive(bool active)
     {
@@ -63,4 +59,5 @@ public class PauseMenu : MonoBehaviour,IMenu {
         foreach (Transform tr in listedTransforms)
             tr.gameObject.SetActive(active);
     }
+
 }

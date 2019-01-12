@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour {
     {
         Vector2 viewPos = worldCamera.WorldToViewportPoint(transform.position);
 
-        Debug.Log(viewPos);
+        //Debug.Log(viewPos);
 
         if (viewPos.x > 1)
         {

@@ -16,7 +16,10 @@ public class UIManager : Singleton_MB<UIManager>
     private MainMenu mainMenu;
     [SerializeField]
     private LoadMenu loadMenu;
-
+    [SerializeField]
+    private StatsMenu statsMenu;
+    [SerializeField]
+    private SaveMenu saveMenu;
 
 
     private void Start()
@@ -38,10 +41,15 @@ public class UIManager : Singleton_MB<UIManager>
     private void HandleGameStateChanged(GameState currentState, GameState previousState)
     {
         if (previousState == GameState.PAUSED && currentState == GameState.RUNNING)
+        {
             pauseMenu.SetMenuActive(false);
+        }
+
         if (previousState == GameState.RUNNING && currentState == GameState.PAUSED)
+        {
             pauseMenu.SetMenuActive(true);
-        
+        }
+
         if (previousState == GameState.PREGAME && currentState == GameState.RUNNING)
         {
             mainMenu.SetMenuActive(false);
@@ -50,6 +58,16 @@ public class UIManager : Singleton_MB<UIManager>
         if (previousState != GameState.PREGAME && currentState == GameState.PREGAME)
         {
             mainMenu.SetMenuActive(true);
+        }
+
+        if (previousState == GameState.RUNNING && currentState == GameState.LEVELSTATS)
+        {
+            statsMenu.SetMenuActive(true);
+        }
+
+        if (previousState == GameState.LEVELSTATS && currentState == GameState.RUNNING)
+        {
+            statsMenu.SetMenuActive(false);
         }
 
     }
@@ -83,8 +101,24 @@ public class UIManager : Singleton_MB<UIManager>
     {
         TransitionInMenus(mainMenu, loadMenu);
     }
-    public void ToMainMenu()
+
+    public void ToStatsMenu(IMenu from)
     {
-        TransitionInMenus(loadMenu, mainMenu);
+        TransitionInMenus(from,statsMenu);
+    }
+
+    public void ToPauseMenu(IMenu from)
+    {
+        TransitionInMenus(from, pauseMenu);
+    }
+
+    public void ToMainMenu(IMenu from)
+    {
+        TransitionInMenus(from, mainMenu);
+    }
+
+    public void ToSaveMenu(IMenu from)
+    {
+        TransitionInMenus(from, saveMenu);
     }
 }
