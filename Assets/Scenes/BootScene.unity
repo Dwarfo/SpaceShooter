@@ -222,7 +222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.449997, y: 0}
+  m_AnchoredPosition: {x: -12.449982, y: 0}
   m_SizeDelta: {x: 24.899994, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &24533952
@@ -1306,8 +1306,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 228.27, y: 0}
-  m_SizeDelta: {x: -456.55, y: 0}
+  m_AnchoredPosition: {x: 107.6, y: 0}
+  m_SizeDelta: {x: -215.2, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1024043378
 MonoBehaviour:
@@ -2325,6 +2325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backButton: {fileID: 1010507379}
   gameSave: {fileID: 1251181874354770, guid: 89700e18ba7b39c40aa31d86072527ec, type: 2}
+  scrollViewContetnt: {fileID: 1556136981}
 --- !u!1 &1413975033
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723,10 +2724,10 @@ RectTransform:
   m_Father: {fileID: 1024043377}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 212.725, y: -199.5}
-  m_SizeDelta: {x: 425.45, y: 65}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -334}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1556136983
 MonoBehaviour:
@@ -2847,7 +2848,7 @@ Prefab:
     - target: {fileID: 224523829271974594, guid: 89700e18ba7b39c40aa31d86072527ec,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 212.725
+      value: 333.4
       objectReference: {fileID: 0}
     - target: {fileID: 224523829271974594, guid: 89700e18ba7b39c40aa31d86072527ec,
         type: 2}
@@ -2857,7 +2858,7 @@ Prefab:
     - target: {fileID: 224523829271974594, guid: 89700e18ba7b39c40aa31d86072527ec,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 425.45
+      value: 666.8
       objectReference: {fileID: 0}
     - target: {fileID: 224523829271974594, guid: 89700e18ba7b39c40aa31d86072527ec,
         type: 2}
@@ -2893,11 +2894,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114908530872756150, guid: 89700e18ba7b39c40aa31d86072527ec,
-        type: 2}
-      propertyPath: m_PreferredHeight
-      value: 65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89700e18ba7b39c40aa31d86072527ec, type: 2}

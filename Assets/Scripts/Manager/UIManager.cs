@@ -99,6 +99,7 @@ public class UIManager : Singleton_MB<UIManager>
 
     public void ToLoadMenu()
     {
+        loadMenu.Renew();
         TransitionInMenus(mainMenu, loadMenu);
     }
 
