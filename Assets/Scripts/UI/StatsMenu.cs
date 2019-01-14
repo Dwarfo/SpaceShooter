@@ -40,6 +40,7 @@ public class StatsMenu : MonoBehaviour, IMenu {
     {
         //GameManager.Instance.RestartGame();
         UIManager.Instance.ToMainMenu(this);
+        //TODO make normal Game reset on going to main menu
         GameManager.Instance.GoToMainMenu();
     }
 

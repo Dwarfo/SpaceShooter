@@ -12,7 +12,7 @@ public class GameManager : Singleton_MB<GameManager> {
     public Camera dummyCamera;
     public GameObject player;
     public ConsistentStats playerConsistentStats;
-    
+
     public LevelStats[] levels;
     public GameObject[] SystemPrefabs;
     public Events.EventGameState OnGameStateChanged;
@@ -20,7 +20,7 @@ public class GameManager : Singleton_MB<GameManager> {
     public Events.EmptyEvent OnGameWon;
 
     [SerializeField]
-    private int currentLevelStats; 
+    private int currentLevelStats;
     private List<GameObject> instancedSystemPrefabs;
     [SerializeField]
     private string currentLevelName = string.Empty;
@@ -72,17 +72,17 @@ public class GameManager : Singleton_MB<GameManager> {
 
     public void QuitGame()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (EditorApplication.isPlaying)
         {
             UnityEditor.EditorApplication.isPlaying = false;
             Application.Quit();
         }
-        #else
+#else
 
         Application.Quit();
 
-        #endif
+#endif
     }
 
     public void UpdateState(GameState state)
@@ -134,7 +134,7 @@ public class GameManager : Singleton_MB<GameManager> {
         }
 
         Debug.Log("Load Complete");
-        
+
     }
 
     private void OnUnLoadOperationComplete(AsyncOperation ao)
@@ -232,6 +232,22 @@ public class GameManager : Singleton_MB<GameManager> {
         return gameSave;
     }
 
+    private void LoadGameSave(GameSave gameSave)
+    {
+        var playerStats = player.GetComponent<PlayerStats>();
+
+        playerStats.armor = gameSave.armor;
+        playerStats.currentHp = gameSave.currentHp;
+        playerStats.drag = gameSave.drag;
+        playerStats.LivesRemaining = gameSave.LivesRemaining;
+        playerStats.maxHp = gameSave.maxHp;
+        playerStats.rotSpeed = gameSave.rotSpeed;
+        playerStats.speed = gameSave.speed;
+        currentLevelStats = gameSave.currentLevelNum;
+        player.GetComponent<Weapon>().currentWeapon = gameObject.GetComponent<AllWeaponTypes>().GetWeapon(gameSave.currentWeapon);
+
+    }
+
     public void SaveGame(String savename)
     {
         BinaryFormatter gameSaver = new BinaryFormatter();
@@ -239,22 +255,30 @@ public class GameManager : Singleton_MB<GameManager> {
 
         Debug.Log(Application.persistentDataPath + savename + ".sv");
 
-        if(CurrentGameState != GameState.LEVELSTATS)
+        if (CurrentGameState != GameState.LEVELSTATS)
             currentGameSave = GetGameSave();
 
         gameSaver.Serialize(file, currentGameSave);
         file.Close();
     }
 
+    public void LoadGame(string saveName)
+    {
+        //Load weapon from AllWeaponTypes class, as a number
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/" + saveName, FileMode.Open);
+        GameSave gameSave = (GameSave)bf.Deserialize(file);
+        //TODO some part of save are loaded before the level loads and some after(player stats) make player stats exist before level load
+        StartGame();
+        LoadGameSave(gameSave);
+
+        
+    } 
+    
     public void GoToMainMenu()
     {
         currentLevelStats = 0;
         UpdateState(GameState.PREGAME);
-    }
-
-    public void LoadGame()
-    {
-        //Load weapon from AllWeaponTypes class, as a number
     }
     
 }
